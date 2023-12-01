@@ -52,4 +52,12 @@ class RegisteredUserController extends Controller
 
         return response()->json(['message' => 'Email verified successfully.'], 200);
     }
+
+    public function sendVerifyEmail($id) {
+
+        $user = User::find($id);
+        $user->sendEmailVerificationNotification();
+
+        return response()->json(['message' => 'We are sending a email verification link on your email. Please check your email and verify.'], 201);
+    }
 }

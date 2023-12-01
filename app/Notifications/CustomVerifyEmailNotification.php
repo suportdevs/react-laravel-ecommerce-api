@@ -46,8 +46,8 @@ class CustomVerifyEmailNotification extends Notification
         $frontendMailUrl = str_replace('http://localhost:8000/api', $frontendUrl, $backendMailUrl);
 
         return (new MailMessage)
-            ->subject('Custom Email Verification') // Customize the email subject
-            ->line('Custom verification email content.') // Add custom content here
+            ->subject('Email Verification') // Customize the email subject
+            ->line('verification email content.') // Add custom content here
             ->action('Verify Email Address', $frontendMailUrl)
             ->line('If you did not create an account, no further action is required.');
     }
