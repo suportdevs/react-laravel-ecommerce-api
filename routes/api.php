@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/register', [RegisteredUserController::class, 'register']);
-Route::post('/login', [AuthenticatedSessionController::class, 'login']);
+Route::post('/register', [RegisteredUserController::class, 'register'])->name('register');
+Route::post('/login', [AuthenticatedSessionController::class, 'login'])->name('login');
 
 Route::get('/email/verify/{id}/{hash}', [RegisteredUserController::class, 'verifyEmail'])
     // ->middleware(['signed', 'throttle:6,1'])
@@ -32,6 +33,14 @@ Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
 
 Route::post('/reset-password', [NewPasswordController::class, 'store'])
                 ->name('password.store');
+// Products routes
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/products', [ProductController::class, 'products'])->name('products');
+    Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
+    Route::post('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::post('/products/delete', [ProductController::class, 'delete'])->name('products.delete');
+});
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
