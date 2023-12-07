@@ -34,12 +34,12 @@ class ProductController extends Controller
                 'name' => $request->name,
                 'description' => $request->description,
                 'image' => $request->image,
-                'categories' => $request->categories,
-                'colors' => $request->colors,
-                'sizes' => $request->sizes,
+                'categories' => json_encode($request->categories),
+                'colors' => json_encode($request->colors),
+                'sizes' => json_encode($request->sizes),
                 'rate' => $request->rate,
-                '_key' => uniqueKey(),
                 'created_by' => Auth::id(),
+                '_key' => uniqueKey(),
             ]);
             DB::commit();
             return response()->json(['message' => "Product created successfull.", 'product' => $product], 201);
@@ -54,10 +54,10 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'image' => 'required',
-            'categories' => 'required',
-            'colors' => 'required',
-            'sizes' => 'required',
-            'rate' => 'required|number',
+            'categories' => 'required|array',
+            'colors' => 'required|array',
+            'sizes' => 'required|array',
+            'rate' => 'required',
         ]);
         if($validator->fails()){
             return response()->json(['error' => $validator->errors()], 422);
@@ -68,9 +68,9 @@ class ProductController extends Controller
                 'name' => $request->name,
                 'description' => $request->description,
                 'image' => $request->image,
-                'categories' => $request->categories,
-                'colors' => $request->colors,
-                'sizes' => $request->sizes,
+                'categories' => json_encode($request->categories),
+                'colors' => json_encode($request->colors),
+                'sizes' => json_encode($request->sizes),
                 'rate' => $request->rate,
                 'updated_by' => Auth::id(),
             ]);

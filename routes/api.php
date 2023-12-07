@@ -37,7 +37,7 @@ Route::post('/reset-password', [NewPasswordController::class, 'store'])
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/products', [ProductController::class, 'products'])->name('products');
     Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
-    Route::post('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::post('/products/{id}/update', [ProductController::class, 'update'])->name('products.update');
     Route::post('/products/delete', [ProductController::class, 'delete'])->name('products.delete');
 });
 

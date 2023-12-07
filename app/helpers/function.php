@@ -9,3 +9,8 @@ if (!function_exists('uniqueKey')) {
         return substr($uniqueKey, 0, 32); // Outputs a 32-character unique key with timestamp and uniqid
     }
 }
+
+function pr($target, $exit = true) {
+    print_r($target);
+    $exit && die;
+}
