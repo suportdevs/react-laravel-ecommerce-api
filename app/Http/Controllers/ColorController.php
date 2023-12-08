@@ -47,7 +47,7 @@ class ColorController extends Controller
 
     public function updated(Request $request, $id) {
         $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'unique', Rule::unique('colors')->ignore($id)],
+            'name' => ['required', 'string', Rule::unique('colors')->ignore($id)],
             'color' => 'required',
         ]);
         if($validator->fails()){

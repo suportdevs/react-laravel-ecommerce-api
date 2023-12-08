@@ -31,7 +31,7 @@ class SizeController extends Controller
         }
         try{
             DB::beginTransaction();
-            $size = Size::create([
+            $size = Size::insert([
                 'name' => $request->name,
                 'description'=> $request->description,
                 'created_at' => Carbon::now(),

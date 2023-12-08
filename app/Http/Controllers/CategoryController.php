@@ -21,7 +21,7 @@ class CategoryController extends Controller
 
     public function store(Request $request) {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|unique',
+            'name' => 'required|string|unique:categories',
         ]);
         if($validator->fails()){
             return response()->json(['error' => $validator->errors()], 422);
@@ -46,7 +46,7 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id) {
         $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'unique', Rule::unique('categories')->ignore($id)],
+            'name' => ['required', 'string', Rule::unique('categories')->ignore($id)],
         ]);
         if($validator->fails()){
             return response()->json(['error' => $validator->errors()], 422);
