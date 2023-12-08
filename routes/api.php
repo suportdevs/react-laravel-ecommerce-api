@@ -4,7 +4,9 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\ColorController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SizeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +41,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
     Route::post('/products/{id}/update', [ProductController::class, 'update'])->name('products.update');
     Route::post('/products/delete', [ProductController::class, 'delete'])->name('products.delete');
+
+    Route::post('/sizes', [SizeController::class, 'sizes'])->name('sizes');
+    Route::post('/sizes/store', [SizeController::class, 'store'])->name('sizes.store');
+    Route::post('/sizes/{id}/update', [SizeController::class, 'update'])->name('sizes.update');
+    Route::post('/sizes/delete', [SizeController::class, 'delete'])->name('sizes.delete');
+
+    Route::post('/colors', [ColorController::class, 'colors'])->name('colors');
+    Route::post('/colors/store', [ColorController::class, 'store'])->name('colors.store');
+    Route::post('/colors/{id}/update', [ColorController::class, 'update'])->name('colors.update');
+    Route::post('/colors/delete', [ColorController::class, 'delete'])->name('colors.delete');
 });
 
 
