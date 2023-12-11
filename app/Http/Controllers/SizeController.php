@@ -16,7 +16,7 @@ class SizeController extends Controller
     public function sizes(Request $request) {
         try{
             $sizes = Size::get();
-            return response()->json(['sizes' => $sizes]);
+            return response()->json($sizes);
         }catch(\Exception $e){
             return response()->json(['message' => $e->getMessage()]);
         }

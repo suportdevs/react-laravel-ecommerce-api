@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Validator;
 class ProductController extends Controller
 {
     public function products(Request $request) {
-        $products =Product::get();
-        return response()->json(['products' => $products]);
+        $products = Product::filter($request)->get();
+        return response()->json($products);
     }
 
     public function store(Request $request) {

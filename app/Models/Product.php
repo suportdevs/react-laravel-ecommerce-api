@@ -14,4 +14,11 @@ class Product extends Model
     
     protected $guarded = ['id'];
 
+    public function scopeFilter($query, $filters) {
+        $query->when($filters->category ?? false, function ($query, $category) {
+            $categoryId = Category::where('slug', $category)->first()->id ?? NULL;
+            $query->whereJsonContains('categories', $categoryId);
+        });
+    }
+
 }

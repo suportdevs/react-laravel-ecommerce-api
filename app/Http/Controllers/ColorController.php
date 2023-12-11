@@ -16,7 +16,7 @@ class ColorController extends Controller
 {
     public function colors(Request $request) {
         $colors = Color::get();
-        return response()->json(['colors' => $colors]);
+        return response()->json($colors);
     }
 
     public function store(Request $request) {

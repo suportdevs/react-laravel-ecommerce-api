@@ -16,7 +16,7 @@ class CategoryController extends Controller
 {
     public function categories(Request $request) {
         $categories = Category::get();
-        return response()->json(['categories', $categories]);
+        return response()->json($categories);
     }
 
     public function store(Request $request) {
