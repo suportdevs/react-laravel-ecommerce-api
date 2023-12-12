@@ -11,7 +11,11 @@ use Illuminate\Support\Facades\Validator;
 class ProductController extends Controller
 {
     public function products(Request $request) {
-        $products = Product::filter($request)->get();
+        if($request->product_id){
+            $products = Product::find($request->product_id);
+        }else{
+            $products = Product::filter($request)->get();
+        }
         return response()->json($products);
     }
 

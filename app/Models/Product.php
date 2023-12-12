@@ -18,6 +18,8 @@ class Product extends Model
         $query->when($filters->category ?? false, function ($query, $category) {
             $categoryId = Category::where('slug', $category)->first()->id ?? NULL;
             $query->whereJsonContains('categories', $categoryId);
+        })->when($filters->product_id ?? false, function ($query, $product_id) {
+            $query->where('id', $product_id);
         });
     }
 
