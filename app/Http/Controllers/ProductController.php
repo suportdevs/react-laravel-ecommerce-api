@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Color;
 use App\Models\Product;
+use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +14,11 @@ class ProductController extends Controller
 {
     public function products(Request $request) {
         if($request->product_id){
-            $products = Product::find($request->product_id);
+            $product = Product::find($request->product_id);
+            // return json_decode($product->colors, true);
+            $colors = Color::whereIn('id', json_decode($product->colors, true))->get();
+            $sizes = Size::whereIn('id', json_decode($product->sizes, true))->get();
+            return response()->json(['product' => $product, 'colors' => $colors, 'sizes' => $sizes]);
         }else{
             $products = Product::filter($request)->get();
         }
