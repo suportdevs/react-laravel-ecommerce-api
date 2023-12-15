@@ -14,10 +14,10 @@ class ProductController extends Controller
 {
     public function products(Request $request) {
         if($request->product_id){
-            $product = Product::find($request->product_id);
+            $product = Product::select('id', 'name', 'categories', 'sizes', 'colors', 'image', 'description', 'rate')->find($request->product_id);
             // return json_decode($product->colors, true);
-            $colors = Color::whereIn('id', json_decode($product->colors, true))->get();
-            $sizes = Size::whereIn('id', json_decode($product->sizes, true))->get();
+            $colors = Color::whereIn('id', json_decode($product->colors, true))->select('id', 'name', 'color')->get();
+            $sizes = Size::whereIn('id', json_decode($product->sizes, true))->select('id', 'name')->get();
             return response()->json(['product' => $product, 'colors' => $colors, 'sizes' => $sizes]);
         }else{
             $products = Product::filter($request)->get();
